@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Dylan Blechner" />
+
+<meta name="date" content="2017-03-29" />
+
+<title>Step-by-Step Instructions</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Senior Project - Dylan Blechner</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="thestat.html">The Statistic</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    The Data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="thedata.html">The Data</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="thedata2007.html">2007-2008</a>
+    </li>
+    <li>
+      <a href="thedata2008.html">2008-2009</a>
+    </li>
+    <li>
+      <a href="thedata2009.html">2009-2010</a>
+    </li>
+    <li>
+      <a href="thedata2010.html">2010-2011</a>
+    </li>
+    <li>
+      <a href="thedata2011.html">2011-2012</a>
+    </li>
+    <li>
+      <a href="thedata2012.html">2012-2013</a>
+    </li>
+    <li>
+      <a href="thedata2013.html">2013-2014</a>
+    </li>
+    <li>
+      <a href="thedata2014.html">2014-2015</a>
+    </li>
+    <li>
+      <a href="thedata2015.html">2015-2016</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    NBA Predictions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="nbamodel4.html">All Positions</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="nbapointguards.html">NBA Point Guards</a>
+    </li>
+    <li>
+      <a href="nbashootingguards.html">NBA Shooting Guards</a>
+    </li>
+    <li>
+      <a href="nbasmallforwards.html">NBA Small Forwards</a>
+    </li>
+    <li>
+      <a href="nbapowerforwards.html">NBA Power Forwards</a>
+    </li>
+    <li>
+      <a href="nbacenters.html">NBA Centers</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="salarycomparisons.html">Salary Comparisons</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Portfolio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Portfolio_thestat.html">Portfolio</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="stepbystep.html">Step-by-Steps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="refs.html">References</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Step-by-Step Instructions</h1>
+<h4 class="author"><em>Dylan Blechner</em></h4>
+<h4 class="date"><em>March 29, 2017</em></h4>
+
+</div>
+
+
+<p><br><br></p>
+<div id="step-1-web-scraping" class="section level2">
+<h2>Step 1: Web Scraping</h2>
+<p>We can successfully read in ten years of NBA data from <a href="basketball-reference.com" class="uri">basketball-reference.com</a>. My dataset now includes player data for each year including Last two Years totals, Career totals, Playoff data, and Career Playoff totals data. Each player data row also includes the Salary for the year following the data. This is so I can try to understand what factors from this year contribute to the salary the player gets paid in the following year. <br></p>
+<p>Grabbing the data has been one of the more difficult aspects of the project so far and has taken up most of our time. <br><br></p>
+<p>Below is the final version of our web scraping R script:</p>
+<pre class="r"><code>library(XML)
+library(httr)
+library(rvest)
+library(tidyverse)
+
+#mySalaryYear &lt;- 2007  # 2016 =&gt; Collect your Salary in 2016-2017 Season
+mySalaryYear &lt;- 2016
+myStatsYear  &lt;- mySalaryYear-1
+
+options( stringsAsFactors=FALSE )
+options( check.names=FALSE )
+
+DataDir &lt;- &quot;/home/steve/R/R Projects/NBA Salaries BBRef/Data/Salary_Dataset_v02&quot;
+setwd(DataDir)
+
+if (mySalaryYear &gt;= 2015) {
+  NBATeams &lt;- c(&#39;ATL&#39;,&#39;BOS&#39;,&#39;BRK&#39;,&#39;CHO&#39;,&#39;CHI&#39;,&#39;CLE&#39;,&#39;DAL&#39;,&#39;DEN&#39;,&#39;DET&#39;,&#39;GSW&#39;,&#39;HOU&#39;,&#39;IND&#39;,&#39;LAC&#39;,&#39;LAL&#39;,&#39;MEM&#39;,&#39;MIA&#39;,&#39;MIL&#39;,&#39;MIN&#39;,&#39;NOP&#39;,&#39;NYK&#39;,&#39;OKC&#39;,&#39;ORL&#39;,&#39;PHI&#39;,&#39;PHO&#39;,&#39;POR&#39;,&#39;SAC&#39;,&#39;SAS&#39;,&#39;TOR&#39;,&#39;UTA&#39;,&#39;WAS&#39;)
+}
+if (mySalaryYear &lt; 2015 &amp; mySalaryYear &gt;= 2013) {
+  NBATeams &lt;- c(&#39;ATL&#39;,&#39;BOS&#39;,&#39;BRK&#39;,&#39;CHO&#39;,&#39;CHI&#39;,&#39;CLE&#39;,&#39;DAL&#39;,&#39;DEN&#39;,&#39;DET&#39;,&#39;GSW&#39;,&#39;HOU&#39;,&#39;IND&#39;,&#39;LAC&#39;,&#39;LAL&#39;,&#39;MEM&#39;,&#39;MIA&#39;,&#39;MIL&#39;,&#39;MIN&#39;,&#39;NOP&#39;,&#39;NYK&#39;,&#39;OKC&#39;,&#39;ORL&#39;,&#39;PHI&#39;,&#39;PHO&#39;,&#39;POR&#39;,&#39;SAC&#39;,&#39;SAS&#39;,&#39;TOR&#39;,&#39;UTA&#39;,&#39;WAS&#39;)
+}
+if (mySalaryYear &lt; 2013 &amp; mySalaryYear &gt;= 2012) {
+  NBATeams &lt;- c(&#39;ATL&#39;,&#39;BOS&#39;,&#39;BRK&#39;,&#39;CHA&#39;,&#39;CHI&#39;,&#39;CLE&#39;,&#39;DAL&#39;,&#39;DEN&#39;,&#39;DET&#39;,&#39;GSW&#39;,&#39;HOU&#39;,&#39;IND&#39;,&#39;LAC&#39;,&#39;LAL&#39;,&#39;MEM&#39;,&#39;MIA&#39;,&#39;MIL&#39;,&#39;MIN&#39;,&#39;NOH&#39;,&#39;NYK&#39;,&#39;OKC&#39;,&#39;ORL&#39;,&#39;PHI&#39;,&#39;PHO&#39;,&#39;POR&#39;,&#39;SAC&#39;,&#39;SAS&#39;,&#39;TOR&#39;,&#39;UTA&#39;,&#39;WAS&#39;)
+}
+if (mySalaryYear &lt; 2012 &amp; mySalaryYear &gt;= 2008) {
+  NBATeams &lt;- c(&#39;ATL&#39;,&#39;BOS&#39;,&#39;NJN&#39;,&#39;CHA&#39;,&#39;CHI&#39;,&#39;CLE&#39;,&#39;DAL&#39;,&#39;DEN&#39;,&#39;DET&#39;,&#39;GSW&#39;,&#39;HOU&#39;,&#39;IND&#39;,&#39;LAC&#39;,&#39;LAL&#39;,&#39;MEM&#39;,&#39;MIA&#39;,&#39;MIL&#39;,&#39;MIN&#39;,&#39;NOH&#39;,&#39;NYK&#39;,&#39;OKC&#39;,&#39;ORL&#39;,&#39;PHI&#39;,&#39;PHO&#39;,&#39;POR&#39;,&#39;SAC&#39;,&#39;SAS&#39;,&#39;TOR&#39;,&#39;UTA&#39;,&#39;WAS&#39;)
+}
+if (mySalaryYear &lt; 2008) {
+  NBATeams &lt;- c(&#39;ATL&#39;,&#39;BOS&#39;,&#39;NJN&#39;,&#39;CHA&#39;,&#39;CHI&#39;,&#39;CLE&#39;,&#39;DAL&#39;,&#39;DEN&#39;,&#39;DET&#39;,&#39;GSW&#39;,&#39;HOU&#39;,&#39;IND&#39;,&#39;LAC&#39;,&#39;LAL&#39;,&#39;MEM&#39;,&#39;MIA&#39;,&#39;MIL&#39;,&#39;MIN&#39;,&#39;NOH&#39;,&#39;NYK&#39;,&#39;SEA&#39;,&#39;ORL&#39;,&#39;PHI&#39;,&#39;PHO&#39;,&#39;POR&#39;,&#39;SAC&#39;,&#39;SAS&#39;,&#39;TOR&#39;,&#39;UTA&#39;,&#39;WAS&#39;)
+}
+
+  
+TeamURLs &lt;- paste0(&quot;http://www.basketball-reference.com/teams/&quot;, NBATeams, &quot;/&quot;, mySalaryYear+1, &quot;.html&quot;)
+
+page &lt;- read_html(TeamURLs[1])
+Rosters &lt;- page %&gt;% 
+  html_nodes(&quot;#roster&quot;) %&gt;% 
+  html_table(fill=TRUE, dec = &quot;.&quot;) %&gt;% 
+  as.data.frame()
+playerurls &lt;- page %&gt;%
+  html_nodes(&quot;#roster &gt; tbody &gt; tr:nth-child(n) &gt; td:nth-child(2) &gt; a&quot;) %&gt;% 
+  html_attr(&quot;href&quot;)
+playerurls &lt;- paste0(&quot;http://www.basketball-reference.com&quot;, playerurls)
+Rosters &lt;- cbind(Rosters, playerurls)
+# cleanup:
+  remove(playerurls, page)
+
+for (i in 2:length(TeamURLs)) {
+  page &lt;- read_html(TeamURLs[i])
+  tmpRoster &lt;- page %&gt;% 
+    html_nodes(&quot;#roster&quot;) %&gt;% 
+    html_table(fill=TRUE, dec = &quot;.&quot;) %&gt;% 
+    as.data.frame()
+  playerurls &lt;- page %&gt;%
+    html_nodes(&quot;#roster &gt; tbody &gt; tr:nth-child(n) &gt; td:nth-child(2) &gt; a&quot;) %&gt;% 
+    html_attr(&quot;href&quot;)
+  playerurls &lt;- paste0(&quot;http://www.basketball-reference.com&quot;, playerurls)
+  tmpRoster &lt;- cbind(tmpRoster, playerurls)
+  names(tmpRoster) &lt;- names(Rosters)  # Make sure names are the same or error message (example: BOS 2017 table has no &quot;Player&quot; col name)
+  Rosters   &lt;- rbind(Rosters, tmpRoster)
+  
+  #cleanup:
+  remove(tmpRoster, page, playerurls)
+}
+
+# NOTE: We do not want Roster Rookies because they will have NO stats:
+# ALSO: Remove duplicates if Player is listed with two teams (traded) (slice(1) or slice(1L) does this...)
+Rosters &lt;- Rosters %&gt;%
+  filter(Exp!=&quot;R&quot;) %&gt;%
+  group_by(Player) %&gt;% 
+  slice(1L)      # keep only Player that has single entry
+  
+write.csv(Rosters, paste0(mySalaryYear, &quot;Rosters.csv&quot;), row.names = FALSE)
+remove(TeamURLs, NBATeams, i)
+
+#######################################################################
+#mySalaryYear &lt;- 2015
+myStatsYear  &lt;- mySalaryYear-1
+options( stringsAsFactors=FALSE )
+options( check.names=FALSE )
+DataDir &lt;- &quot;/home/steve/R/R Projects/NBA Salaries BBRef/Data/Salary_Dataset_v02&quot;
+setwd(DataDir)
+Rosters &lt;- read.csv(paste0(mySalaryYear, &quot;Rosters.csv&quot;), check.names = FALSE)
+#######################################################################
+
+Salary   &lt;- data.frame(matrix(ncol = 2, nrow = 0))
+SeasonTotals   &lt;- data.frame(matrix(ncol = 31, nrow = 0))
+CareerTotals   &lt;- data.frame(matrix(ncol = 31, nrow = 0))
+Last2YrsTotals &lt;- data.frame(matrix(ncol = 31, nrow = 0))
+SeasonPlayoffs &lt;- data.frame(matrix(ncol = 31, nrow = 0))
+CareerPlayoffs &lt;- data.frame(matrix(ncol = 31, nrow = 0))
+
+for (i in 1:NROW(Rosters)) {  
+#for (i in 1:50) {  
+  page  &lt;- read_html(Rosters$playerurl[i])
+  mySalarypattern &lt;- paste0(as.character(mySalaryYear), &#39;-&#39;, substr(as.character(mySalaryYear+1), 3, 4))
+  myStatspattern &lt;- paste0(as.character(myStatsYear), &#39;-&#39;, substr(as.character(myStatsYear+1), 3, 4))
+  
+# For debugging:
+  IncludeSalaryScrape &lt;- FALSE
+  if(IncludeSalaryScrape) {
+    if(mySalaryYear == 2016) {
+      #all_all_salaries (after and including 2016-2017 Season):
+      tmpSalary &lt;- page %&gt;%
+        html_nodes(&#39;#all_all_contracts&#39;) %&gt;%   # select a node with hidden comment
+        html_nodes(xpath = &#39;comment()&#39;) %&gt;%   # select comments within node
+        html_text() %&gt;%                       # return contents as text
+        read_html() %&gt;%                       # parse text as html
+        html_node(&#39;table&#39;) %&gt;%                # select table node
+        html_table() %&gt;%                      # parse table and return data.frame
+        tbl_df()
+      PlayerSalary &lt;- tmpSalary$`2016-17`
+      # Convert $ (Factor) column to numeric:
+      PlayerSalary &lt;- sub(&#39;\\$&#39;,&#39;&#39;,as.character(PlayerSalary))
+      PlayerSalary &lt;- gsub(&#39;,&#39;,&#39;&#39;,as.character(PlayerSalary))
+      PlayerSalary &lt;- as.numeric(PlayerSalary)
+      lstSalary &lt;- list(Player=Rosters$Player[i], Salary=PlayerSalary)
+      Salary    &lt;- rbind(Salary, as.data.frame(lstSalary))
+    }
+    if(mySalaryYear != 2016) {
+      #all_all_salaries (until 2016-2017 Season):
+      if (page %&gt;% html_nodes(&#39;#all_all_salaries&#39;) %&gt;% length() != 0) {
+        Salary &lt;-page %&gt;%
+          html_nodes(&#39;#all_all_salaries&#39;) %&gt;%   # select a node with hidden comment
+          html_nodes(xpath = &#39;comment()&#39;) %&gt;%   # select comments within node
+          html_text() %&gt;%                       # return contents as text
+          read_html() %&gt;%                       # parse text as html
+          html_node(&#39;table&#39;) %&gt;%                # select table node
+          html_table() %&gt;%                      # parse table and return data.frame
+          tbl_df() %&gt;%
+          mutate(Salary = sub(&#39;\\$&#39;,&#39;&#39;,as.character(Salary))) %&gt;%
+          mutate(Salary = gsub(&#39;,&#39;,&#39;&#39;,as.character(Salary))) %&gt;%
+          mutate(Salary = as.numeric(Salary)) %&gt;%
+          filter(Season %in% mySalarypattern) %&gt;%
+          group_by(Season) %&gt;%
+          summarise(Player = Rosters$Player[i], Salary = sum(Salary)) %&gt;%
+          select(Player, Salary) %&gt;%
+          rbind(Salary)
+      }
+      Salary &lt;- Salary %&gt;% filter(Salary !=0)
+    }
+  }
+
+#  remove(tmpSalary, lstSalary, PlayerSalary)
+
+  #all_totals
+  if (length(html_nodes(page, &#39;#all_totals&#39;))!=0) {
+    allTotals &lt;- page %&gt;%
+      html_nodes(&#39;#all_totals&#39;) %&gt;%   # select a node with hidden comment
+      html_nodes(xpath = &#39;comment()&#39;) %&gt;%   # select comments within node
+      html_text() %&gt;%                       # return contents as text
+      read_html() %&gt;%                       # parse text as html
+      html_node(&#39;table&#39;) %&gt;%                # select table node
+      html_table() %&gt;%                      # parse table and return data.frame
+      tbl_df()
+
+    if(nrow(allTotals %&gt;% filter(Season == myStatspattern))!=0) {    
+      SeasonTotals &lt;- allTotals %&gt;% 
+        filter(Season == myStatspattern) %&gt;% 
+        slice(1) %&gt;%
+        mutate(Player=Rosters$Player[i]) %&gt;%
+        rbind(SeasonTotals)
+    }
+
+    CareerTotals &lt;- allTotals %&gt;% 
+      filter(Age != &#39;&#39;) %&gt;%
+      filter(Tm != &#39;TOT&#39;) %&gt;%
+      mutate(SeasonStartYear=as.numeric(substr(Season, 1, 4))) %&gt;%
+      filter(Season &lt;= mySalaryYear) %&gt;%
+      select(6:30) %&gt;%
+      select(-ends_with(&quot;%&quot;)) %&gt;%
+      summarise_each(funs(sum)) %&gt;%
+      mutate(Player=Rosters$Player[i]) %&gt;%
+      rbind(CareerTotals)
+    
+    if(nrow(allTotals %&gt;% filter(Season == myStatspattern))!=0) {    
+      Last2YrsTotals &lt;- allTotals %&gt;% 
+        filter(Age != &#39;&#39;) %&gt;%
+        filter(Tm != &#39;TOT&#39;) %&gt;%
+        mutate(SeasonStartYear=as.numeric(substr(Season, 1, 4))) %&gt;%
+        filter(Season &lt;= mySalaryYear) %&gt;%
+        filter(Season &gt;= mySalaryYear-2) %&gt;%
+        select(6:30) %&gt;%
+        select(-ends_with(&quot;%&quot;)) %&gt;%
+        summarise_each(funs(sum)) %&gt;%
+        mutate(Player=Rosters$Player[i]) %&gt;%
+        rbind(Last2YrsTotals)
+    }
+  }
+  
+  #all_playoffs_totals
+  if (length(html_nodes(page, &#39;#all_playoffs_totals&#39;))!=0) {
+    allPlayoffTotals &lt;- page %&gt;%
+      html_nodes(&#39;#all_playoffs_totals&#39;) %&gt;%   # select a node with hidden comment
+      html_nodes(xpath = &#39;comment()&#39;) %&gt;%   # select comments within node
+      html_text() %&gt;%                       # return contents as text
+      read_html() %&gt;%                       # parse text as html
+      html_node(&#39;table&#39;) %&gt;%                # select table node
+      html_table() %&gt;%                      # parse table and return data.frame
+      tbl_df()
+
+    if(nrow(allPlayoffTotals %&gt;% filter(Season == myStatspattern))!=0) {    
+      SeasonPlayoffs &lt;- allPlayoffTotals %&gt;% 
+        filter(Season == myStatspattern) %&gt;% 
+        mutate(Player=Rosters$Player[i]) %&gt;%
+        rbind(SeasonPlayoffs)
+    }
+    
+    CareerPlayoffs &lt;- allPlayoffTotals %&gt;% 
+      filter(Age != &#39;&#39;) %&gt;%
+      filter(Tm != &#39;TOT&#39;) %&gt;%
+      mutate(SeasonStartYear=as.numeric(substr(Season, 1, 4))) %&gt;%
+      filter(Season &lt;= mySalaryYear) %&gt;%
+      select(6:30) %&gt;%
+      select(-ends_with(&quot;%&quot;)) %&gt;%
+      summarise_each(funs(sum)) %&gt;%
+      mutate(Player=Rosters$Player[i]) %&gt;%
+      rbind(CareerPlayoffs)
+  } 
+}
+
+#  remove(tmpSalary, lstSalary, PlayerSalary)
+newcolNames &lt;- c(&#39;CareerG&#39;, &#39;CareerGS&#39;, &#39;CareerMP&#39;, &#39;CareerFG&#39;, &#39;CareerFGA&#39;, &#39;Career3P&#39;, &#39;Career3PA&#39;, &#39;Career2P&#39;, &#39;Career2PA&#39;, &#39;CareerFT&#39;, &#39;CareerFTA&#39;, &#39;CareerORB&#39;, &#39;CareerDRB&#39;, &#39;CareerTRB&#39;, &#39;CareerAST&#39;, &#39;CareerSTL&#39;, &#39;CareerBLK&#39;, &#39;CareerTOV&#39;, &#39;CareerPF&#39;, &#39;CareerPTS&#39;, &#39;Player&#39;)
+names(CareerTotals) &lt;- newcolNames
+newcolNames &lt;- c(&#39;Last2YrsG&#39;, &#39;Last2YrsGS&#39;, &#39;Last2YrsMP&#39;, &#39;Last2YrsFG&#39;, &#39;Last2YrsFGA&#39;, &#39;Last2Yrs3P&#39;, &#39;Last2Yrs3PA&#39;, &#39;Last2Yrs2P&#39;, &#39;Last2Yrs2PA&#39;, &#39;Last2YrsFT&#39;, &#39;Last2YrsFTA&#39;, &#39;Last2YrsORB&#39;, &#39;Last2YrsDRB&#39;, &#39;Last2YrsTRB&#39;, &#39;Last2YrsAST&#39;, &#39;Last2YrsSTL&#39;, &#39;Last2YrsBLK&#39;, &#39;Last2YrsTOV&#39;, &#39;Last2YrsPF&#39;, &#39;Last2YrsPTS&#39;, &#39;Player&#39;)
+names(Last2YrsTotals) &lt;- newcolNames
+newcolNames &lt;- c(&#39;CareerPlayoffG&#39;, &#39;CareerPlayoffGS&#39;, &#39;CareerPlayoffMP&#39;, &#39;CareerPlayoffFG&#39;, &#39;CareerPlayoffFGA&#39;, &#39;CareerPlayoff3P&#39;, &#39;CareerPlayoff3PA&#39;, &#39;CareerPlayoff2P&#39;, &#39;CareerPlayoff2PA&#39;, &#39;CareerPlayoffFT&#39;, &#39;CareerPlayoffFTA&#39;, &#39;CareerPlayoffORB&#39;, &#39;CareerPlayoffDRB&#39;, &#39;CareerPlayoffTRB&#39;, &#39;CareerPlayoffAST&#39;, &#39;CareerPlayoffSTL&#39;, &#39;CareerPlayoffBLK&#39;, &#39;CareerPlayoffTOV&#39;, &#39;CareerPlayoffPF&#39;, &#39;CareerPlayoffPTS&#39;, &#39;Player&#39;)
+names(CareerPlayoffs) &lt;- newcolNames
+#cat(paste(shQuote(paste0(&quot;Playoff&quot;, names(SeasonPlayoffs[-(31)]))), collapse=&quot;, &quot;))
+newcolNames &lt;- c(&#39;PlayoffSeason&#39;, &#39;PlayoffAge&#39;, &#39;PlayoffTm&#39;, &#39;PlayoffLg&#39;, &#39;PlayoffPos&#39;, &#39;PlayoffG&#39;, &#39;PlayoffGS&#39;, &#39;PlayoffMP&#39;, &#39;PlayoffFG&#39;, &#39;PlayoffFGA&#39;, &#39;PlayoffFG%&#39;, &#39;Playoff3P&#39;, &#39;Playoff3PA&#39;, &#39;Playoff3P%&#39;, &#39;Playoff2P&#39;, &#39;Playoff2PA&#39;, &#39;Playoff2P%&#39;, &#39;PlayoffeFG%&#39;, &#39;PlayoffFT&#39;, &#39;PlayoffFTA&#39;, &#39;PlayoffFT%&#39;, &#39;PlayoffORB&#39;, &#39;PlayoffDRB&#39;, &#39;PlayoffTRB&#39;, &#39;PlayoffAST&#39;, &#39;PlayoffSTL&#39;, &#39;PlayoffBLK&#39;, &#39;PlayoffTOV&#39;, &#39;PlayoffPF&#39;, &#39;PlayoffPTS&#39;, &#39;Player&#39;)
+names(SeasonPlayoffs) &lt;- newcolNames
+
+write.csv(Salary, paste0(mySalaryYear, &quot;Salary.csv&quot;), row.names=FALSE)
+write.csv(SeasonTotals, paste0(mySalaryYear, &quot;SeasonTotals.csv&quot;), row.names=FALSE)
+write.csv(CareerTotals, paste0(mySalaryYear, &quot;CareerTotals.csv&quot;), row.names=FALSE)
+write.csv(Last2YrsTotals, paste0(mySalaryYear, &quot;Last2YrsTotals.csv&quot;), row.names=FALSE)
+write.csv(SeasonPlayoffs, paste0(mySalaryYear, &quot;SeasonPlayoffs.csv&quot;), row.names=FALSE)
+write.csv(CareerPlayoffs, paste0(mySalaryYear, &quot;CareerPlayoffs.csv&quot;), row.names=FALSE)
+
+# CAREFUL: Remove ALL environmental variables and dtables...
+rm(list = ls())</code></pre>
+<p><br><br></p>
+<hr />
+</div>
+<div id="step-2-join-salary-data-with-player-stats" class="section level2">
+<h2>Step 2: Join Salary Data with Player Stats</h2>
+<p>The following R script combines the data tables created above for each year into 10 large tables, one for each year 2007-2016:</p>
+<pre class="r"><code>library(dplyr)
+
+#######################################################################
+mySalaryYear &lt;- 2014
+myStatsYear  &lt;- mySalaryYear-1
+options( stringsAsFactors=FALSE )
+options( check.names=FALSE )
+DataDir &lt;- &quot;/home/steve/R/R Projects/NBA Salaries BBRef/Data/Salary_Dataset_v02&quot;
+setwd(DataDir)
+Rosters        &lt;- read.csv(paste0(mySalaryYear, &quot;Rosters.csv&quot;), check.names = FALSE)
+Salary         &lt;- read.csv(paste0(mySalaryYear, &quot;Salary.csv&quot;), check.names = FALSE)
+SeasonTotals   &lt;- read.csv(paste0(mySalaryYear, &quot;SeasonTotals.csv&quot;), check.names = FALSE)
+CareerTotals   &lt;- read.csv(paste0(mySalaryYear, &quot;CareerTotals.csv&quot;), check.names = FALSE)
+Last2YrsTotals &lt;- read.csv(paste0(mySalaryYear, &quot;Last2YrsTotals.csv&quot;), check.names = FALSE)
+SeasonPlayoffs &lt;- read.csv(paste0(mySalaryYear, &quot;SeasonPlayoffs.csv&quot;), check.names = FALSE)
+CareerPlayoffs &lt;- read.csv(paste0(mySalaryYear, &quot;CareerPlayoffs.csv&quot;), check.names = FALSE)
+#######################################################################
+
+#############################
+# NOTE: SeasonTotals, SeasonPlayoffs have NA values for some %&#39;s (3P% 0-0 = NA) that nedd to be changed to 0&#39;s:
+SeasonTotals[is.na(SeasonTotals)] &lt;- 0
+SeasonPlayoffs[is.na(SeasonPlayoffs)] &lt;- 0
+#############################
+
+#############################
+# http://stackoverflow.com/questions/19965265/how-to-convert-from-string-to-numeric-value-in-r
+# NOTE: Rosters$Ht is a character vector (&quot;6-6&quot;), convert to inches:
+# Convert $ (Factor) column to numeric:
+Rosters$Ht &lt;- sapply(strsplit(Rosters$Ht, &quot;-&quot;), function(x) {x &lt;- as.numeric(x); x[1] + x[2] / 12})
+# Brilliant.
+#############################
+
+# merge using dplyr left_joins
+# we omit 5 NA players (see below)
+RS &lt;- left_join(Rosters, Salary, by=&#39;Player&#39;) %&gt;% tbl_df() # merge Salary to Rosters
+RS %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+Salary %&gt;% anti_join(RS, .,by=&quot;Player&quot;) %&gt;% select(playerurls) %&gt;% print.data.frame(row.names = F)
+
+RSST &lt;- left_join(Rosters, Salary, by=&#39;Player&#39;) %&gt;% 
+  left_join(., SeasonTotals, by=&quot;Player&quot;) %&gt;%   # merge Salary/Rosters to Season Totals
+  na.omit()                                               
+RSST %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+RSST %&gt;% anti_join(RS, .,by=&quot;Player&quot;) %&gt;% select(playerurls) #What are the missing data?
+RSST %&gt;% anti_join(RS, .,by=&quot;Player&quot;) %&gt;% select(playerurls) %&gt;% print.data.frame(row.names = F)
+
+RSSTCT &lt;- left_join(Rosters, Salary, by=&#39;Player&#39;) %&gt;% 
+  left_join(., SeasonTotals, by=&quot;Player&quot;) %&gt;%
+  na.omit() %&gt;%                                              
+  left_join(., CareerTotals, by=&quot;Player&quot;)   # merge Salary/Rosters/Season Totals to Career Totals
+RSSTCT %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+
+RSSTCTLTY &lt;- left_join(Rosters, Salary, by=&#39;Player&#39;) %&gt;% 
+  left_join(., SeasonTotals, by=&quot;Player&quot;) %&gt;%
+  na.omit() %&gt;%                                              
+  left_join(., CareerTotals, by=&quot;Player&quot;) %&gt;%
+  left_join(., Last2YrsTotals, by=&quot;Player&quot;)
+RSSTCTLTY %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+
+RSSTCTLTYSP &lt;- left_join(Rosters, Salary, by=&#39;Player&#39;) %&gt;% 
+  left_join(., SeasonTotals, by=&quot;Player&quot;) %&gt;%
+  na.omit() %&gt;%
+  left_join(., CareerTotals, by=&quot;Player&quot;) %&gt;%
+  left_join(., Last2YrsTotals, by=&quot;Player&quot;) %&gt;%
+  left_join(., SeasonPlayoffs, by=&quot;Player&quot;)
+RSSTCTLTYSP %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+# NOTE: Now we created NA values that nedd to be changed to 0&#39;s:
+RSSTCTLTYSP[is.na(RSSTCTLTYSP)] &lt;- 0
+
+All.Data &lt;- left_join(RSSTCTLTYSP, CareerPlayoffs, by=&#39;Player&#39;)
+All.Data %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+# NOTE: Now we created NA values that nedd to be changed to 0&#39;s:
+All.Data[is.na(All.Data)] &lt;- 0
+
+write.csv(All.Data, paste0(mySalaryYear, &quot;BBRef.csv&quot;), row.names=FALSE)</code></pre>
+<p><br><br></p>
+<hr />
+</div>
+<div id="step-3-combine-data-for-all-10-years" class="section level2">
+<h2>Step 3: Combine Data for all 10 Years:</h2>
+<p>The following R script combines the yearly data tables created above into one large data table:</p>
+<pre class="r"><code>library(tidyverse)
+
+#######################################################################
+mySalaryYear &lt;- 2007
+options( stringsAsFactors=FALSE )
+options( check.names=FALSE )
+DataDir &lt;- &quot;/home/steve/R/R Projects/NBA Salaries BBRef/Data/Salary_Dataset_v02&quot;
+setwd(DataDir)
+#######################################################################
+
+
+#############################
+# Add all years together:
+All.Data &lt;- read.csv(paste0(mySalaryYear, &quot;BBRef.csv&quot;), check.names = FALSE) 
+
+#2016 column 7 has to be renamed for some reason...
+tmp &lt;- read.csv(&quot;2016BBRef.csv&quot;, check.names = FALSE) 
+names(tmp) &lt;- names(All.Data)
+write.csv(tmp, &quot;2016BBRef.csv&quot;, row.names=FALSE)
+remove(tmp)
+
+All.Data &lt;- All.Data %&gt;%
+  mutate(Year = mySalaryYear)
+
+for (i in (mySalaryYear+1):2016) {
+  All.Data &lt;- read.csv(paste0(i, &quot;BBRef.csv&quot;), check.names = FALSE) %&gt;%
+    mutate(Year = i) %&gt;%
+    rbind(All.Data, .)
+}
+
+All.Data %&gt;% is.na() %&gt;% any() #Are there any NA&#39;s in the frame?
+write.csv(All.Data, paste0(mySalaryYear, &quot;-2016-BBRef.csv&quot;), row.names=FALSE)
+df2007to2016 &lt;- read.csv(paste0(mySalaryYear, &quot;-2016-BBRef.csv&quot;), check.names = FALSE)
+#############################</code></pre>
+<p><br><br></p>
+<hr />
+</div>
+<div id="step4-regression-analysis" class="section level2">
+<h2>Step4: Regression Analysis</h2>
+<p>Here is the final script to + calculate a multiple linear regression of NBA Salary vs. many other statistics + predict 2016-2017 NBA Salaries based on this multiple linear regression</p>
+<pre class="r"><code>library(tidyverse)
+library(broom)
+library(plyr)
+
+#-------------------------------#
+### HOUSEKEEPING
+## Change rownames For Special Characters 
+#   Unknown variables: ``3PA``, ``eFG%``, ``FT%``, ``PlayoffFG%``, ``PlayoffeFG%``
+# http://www.cookbook-r.com/Manipulating_data/Renaming_columns_in_a_data_frame/
+# The simplest way is to use rename() from the plyr package:
+# df %&gt;% rename(c(&quot;beta&quot;=&quot;two&quot;, &quot;gamma&quot;=&quot;three&quot;))
+setwd(&quot;/home/steve/R/R Projects/NBA Salaries BBRef/Data/Salary_Dataset_v02&quot;)
+Salary.File &lt;- &quot;2007-2016-BBRef.csv&quot;
+Salary.Data &lt;- read.csv((Salary.File), check.names = FALSE, stringsAsFactors=FALSE)
+rm(Salary.File)
+Salary.Data &lt;- Salary.Data %&gt;%
+  rename(c(`FG%`=&quot;FGpct&quot;, 
+           `3P`=&quot;ThreePt&quot;, 
+           `3PA`=&quot;ThreePtAttmpt&quot;, 
+           `3P%`=&quot;ThreePtpct&quot;, 
+           `2P`=&quot;TwoPt&quot;, 
+           `2PA`=&quot;TwoPtAttmpt&quot;, 
+           `2P%`=&quot;TwoPtpct&quot;, 
+           `eFG%`=&quot;eFGpct&quot;, 
+           `FT%`=&quot;FTpct&quot;, 
+           `PlayoffFG%`=&quot;PlayoffFGpct&quot;, 
+           `Playoff3P%`=&quot;Playoff3Ppct&quot;, 
+           `Playoff2P%`=&quot;Playoff2Ppct&quot;, 
+           `PlayoffeFG%`=&quot;PlayoffeFGpct&quot;, 
+           `PlayoffFT%`=&quot;PlayoffFTpct&quot;))
+
+#-------------------------------#
+### SETUP FOR THE INITIAL REGRESSIONS
+all.lmvars &lt;- c(&quot;Ht&quot;, &quot;Wt&quot;,
+                # &quot;Exp&quot;, 
+                &quot;Age&quot;, &quot;G&quot;, &quot;GS&quot;, &quot;MP&quot;, &quot;FG&quot;, &quot;FGA&quot;, 
+                &quot;FGpct&quot;, &quot;ThreePt&quot;, &quot;ThreePtAttmpt&quot;, &quot;ThreePtpct&quot;, &quot;TwoPt&quot;, &quot;TwoPtAttmpt&quot;, &quot;TwoPtpct&quot;, &quot;eFGpct&quot;, &quot;FT&quot;, &quot;FTA&quot;, 
+                &quot;FTpct&quot;, &quot;ORB&quot;, &quot;DRB&quot;, &quot;TRB&quot;, &quot;AST&quot;, &quot;STL&quot;, &quot;BLK&quot;, &quot;TOV&quot;, &quot;PF&quot;, &quot;PTS&quot;, 
+                &quot;Last2YrsG&quot;, &quot;Last2YrsGS&quot;, &quot;Last2YrsMP&quot;, &quot;Last2YrsFG&quot;, &quot;Last2YrsFGA&quot;, &quot;Last2Yrs3P&quot;, 
+                &quot;Last2Yrs3PA&quot;, &quot;Last2Yrs2P&quot;, &quot;Last2Yrs2PA&quot;, &quot;Last2YrsFT&quot;, &quot;Last2YrsFTA&quot;, 
+                &quot;Last2YrsORB&quot;, &quot;Last2YrsDRB&quot;, &quot;Last2YrsTRB&quot;, &quot;Last2YrsAST&quot;, &quot;Last2YrsSTL&quot;, 
+                &quot;Last2YrsBLK&quot;, &quot;Last2YrsTOV&quot;, &quot;Last2YrsPF&quot;, &quot;Last2YrsPTS&quot;, 
+                &quot;CareerPlayoffG&quot;, 
+                &quot;CareerPlayoffGS&quot;, &quot;CareerPlayoffMP&quot;, &quot;CareerPlayoffFG&quot;, &quot;CareerPlayoffFGA&quot;, 
+                &quot;CareerPlayoff3P&quot;, &quot;CareerPlayoff3PA&quot;, &quot;CareerPlayoff2P&quot;, &quot;CareerPlayoff2PA&quot;, 
+                &quot;CareerPlayoffFT&quot;, &quot;CareerPlayoffFTA&quot;, &quot;CareerPlayoffORB&quot;, &quot;CareerPlayoffDRB&quot;, 
+                &quot;CareerPlayoffTRB&quot;, &quot;CareerPlayoffAST&quot;, &quot;CareerPlayoffSTL&quot;, &quot;CareerPlayoffBLK&quot;, 
+                &quot;CareerPlayoffTOV&quot;, &quot;CareerPlayoffPF&quot;, &quot;CareerPlayoffPTS&quot;)
+
+
+allvars.lmformula &lt;- 
+  all.lmvars %&gt;%
+  sprintf(&quot;`%s`&quot;, .) %&gt;%
+  paste(collapse= &quot; + &quot;) %&gt;% 
+  paste(&quot;Salary ~ &quot;, .) %&gt;% 
+  as.formula()
+
+#-------------------------------#
+### function initial_stepwise_regression
+### Function for our initial total regression and stepwise regression
+initial_stepwise_regression &lt;- function(data, formula){
+  filtered.data &lt;- 
+    data %&gt;%
+    filter(Salary&gt;500000, Year&lt;=2015)
+  AllPosmodel.full &lt;- lm(data=filtered.data, formula)
+  ### Note: The backward modeling takes a long time ~ 5 min
+  AllPosmodel.reduced &lt;- step(AllPosmodel.full, direction=&quot;backward&quot;)
+  return(AllPosmodel.reduced)
+}
+
+#-------------------------------#
+### function trim_salary_table
+### TRIM OUR Salary.Data TABLE TO ONLY SIGNIFICANT VARIABLES
+### Put significant variables into a chr list, use list to select table columns
+trim_and_filter_salary_table &lt;- function(mydata, mymodel){
+  sigvars &lt;- 
+    mymodel %&gt;% 
+    tidy() %&gt;% 
+    filter(p.value&lt;.05) %&gt;% 
+    select(term) %&gt;% .$term
+  sigvars &lt;- c(&quot;Salary&quot;, &quot;Year&quot;, &quot;Pos.x&quot;, sigvars)
+  trimmed.data &lt;- mydata %&gt;% 
+    select(one_of(sigvars)) %&gt;%
+    filter(Salary&gt;500000, Year&lt;=2015) 
+}
+
+subsequent_stepwise_regression &lt;- function(mytrimmeddata, mymodel){
+  mymodel &lt;- lm(data=mytrimmeddata %&gt;% select(-Year, -Pos.x), Salary ~ .)
+  ### Note: The backward modeling takes a long time ~ 5 min
+  mymodel &lt;- step(mymodel, direction=&quot;backward&quot;)
+  return(mymodel)
+}
+
+### Run the function initial_stepwise_regression for each Position
+AllPosmodel.reduced  &lt;- initial_stepwise_regression(Salary.Data, allvars.lmformula)
+trimmed &lt;- trim_and_filter_salary_table(Salary.Data, AllPosmodel.reduced)
+
+AllPosmodel.reduced2 &lt;- subsequent_stepwise_regression(trimmed, AllPosmodel.reduced)
+
+AllPosmodel.reduced %&gt;% summary()
+AllPosmodel.reduced2 %&gt;% summary()
+#OK reduced 2 looks good
+saveRDS(AllPosmodel.reduced2,  file =  &quot;AllPosmodel_reduced2.rds&quot;)
+
+AllPosmodel.nonegcoeffs &lt;- subsequent_stepwise_regression(trimmed.nonegcoeffs, AllPosmodel.reduced3)
+AllPosmodel.reduced3 %&gt;% summary()
+AllPosmodel.nonegcoeffs %&gt;% summary()
+setwd(&quot;/home/steve/tmp/GitHub/srprj_sandbox_R&quot;)
+saveRDS(AllPosmodel.nonegcoeffs,  file =  &quot;AllPosmodel.nonegcoeffs.rds&quot;)
+
+
+#-------------------------------#
+### PREDICT ALL 2016 PLAYER SALARIES AND COMPARE TO ACTUAL
+test &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year==2016)
+AllPos_FITvsACTUAL &lt;- 
+  test %&gt;%
+  predict(AllPosmodel.reduced2, newdata=., interval=&quot;confidence&quot;) %&gt;%
+  tbl_df() %&gt;%
+  mutate(NBASalary=test$Salary) 
+
+Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year==2016) %&gt;%
+  bind_cols(AllPos_FITvsACTUAL, .) %&gt;%
+  write.csv(., &quot;AllPos_FITvsACTUAL.csv&quot;, row.names=FALSE)
+
+#-------------------------------#
+# MORE NEW MODELS:
+# First Test Model
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Exp + Age + GS + FGpct + ThreePtpct + TwoPtpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsSTL + Last2YrsBLK + Last2YrsTOV + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffSTL + PlayoffBLK + PlayoffTOV + PlayoffPTS + CareerPlayoffGS + CareerPlayoff3P + CareerPlayoff3PA + CareerPlayoff2P + CareerPlayoff2PA + CareerPlayoffFT + CareerPlayoffFTA + CareerPlayoffTRB + CareerPlayoffAST + CareerPlayoffSTL + CareerPlayoffBLK + CareerPlayoffTOV + CareerPlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+
+#-------------------------------#
+# Model 1b , remove STLs
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Exp + Age + GS + FGpct + ThreePtpct + TwoPtpct + FTpct + ORB + DRB + AST + BLK + TOV + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsBLK + Last2YrsTOV + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffBLK + PlayoffTOV + PlayoffPTS + CareerPlayoffGS + CareerPlayoff3P + CareerPlayoff3PA + CareerPlayoff2P + CareerPlayoff2PA + CareerPlayoffFT + CareerPlayoffFTA + CareerPlayoffTRB + CareerPlayoffAST + CareerPlayoffBLK + CareerPlayoffTOV + CareerPlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1c , remove STLs, BLKs
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Exp + Age + GS + FGpct + ThreePtpct + TwoPtpct + FTpct + ORB + DRB + AST + TOV + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsTOV + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffTOV + PlayoffPTS + CareerPlayoffGS + CareerPlayoff3P + CareerPlayoff3PA + CareerPlayoff2P + CareerPlayoff2PA + CareerPlayoffFT + CareerPlayoffFTA + CareerPlayoffTRB + CareerPlayoffAST + CareerPlayoffTOV + CareerPlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1d , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Exp + Age + GS + FGpct + ThreePtpct + TwoPtpct + FTpct + TRB + AST + TOV + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsTOV + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffTOV + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1e , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Exp + Age + GS + FGpct + ThreePtpct + TwoPtpct + FTpct + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1f , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Exp + Age + GS + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1g , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# add back STL&#39;s
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ STL + Last2YrsSTL + PlayoffSTL + Ht + Exp + Age + GS + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1h , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# add back STL&#39;s
+# add back BLK&#39;s
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ BLK + Last2YrsBLK + PlayoffBLK + STL + Last2YrsSTL + PlayoffSTL + Ht + Exp + Age + GS + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1i , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# add back STL&#39;s
+# add back TOV&#39;s
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ TOV + Last2YrsTOV + PlayoffTOV + STL + Last2YrsSTL + PlayoffSTL + Ht + Exp + Age + GS + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1i , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# add back STL&#39;s
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ STL + Last2YrsSTL + PlayoffSTL + Ht + Exp + Age + GS + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+
+#-------------------------------#
+# Model 1j , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# add back STL&#39;s
+# Quadratic term for PTS
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ STL + Last2YrsSTL + PlayoffSTL + Ht + Exp + Age + GS + TRB + AST + I(PTS^2) + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + Playoff3Ppct + Playoff2Ppct + PlayoffFTpct + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+#-------------------------------#
+# Model 1j , remove STLs, BLKs, change ORBs to TRBs, remove Career Playoffs, remove TOVs, remove 3x pct&#39;s
+# add back STL&#39;s
+# remove negative coefficient FTpct
+# Variables chosen by hand - DJ
+
+firsttestvars.lmformula &lt;-
+  &quot;Salary ~ STL + Last2YrsSTL + PlayoffSTL + Ht + Exp + Age + GS + TRB + AST + PTS + Last2YrsGS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsFT + Last2YrsFTA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+firsttestmodel.full &lt;- lm(data=filtered.data, firsttestvars.lmformula)
+summary(firsttestmodel.full)
+
+firsttestmodel.reduced &lt;- step(firsttestmodel.full, direction=&quot;backward&quot;)
+summary(firsttestmodel.reduced)
+
+
+# see below: use this Model 1f to predict player salaries for 2017:
+### PREDICT ALL 2016 PLAYER SALARIES AND COMPARE TO ACTUAL
+data2016 &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year==2016)
+Model1f_FITvsACTUAL &lt;- 
+  data2016 %&gt;%
+  predict(firsttestmodel.reduced, newdata=., interval=&quot;confidence&quot;) %&gt;%
+  tbl_df() %&gt;%
+  mutate(NBASalary=data2016$Salary) 
+
+Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year==2016) %&gt;%
+  bind_cols(Model1f_FITvsACTUAL, .) %&gt;%
+  write.csv(., &quot;Model1f_FITvsACTUAL.csv&quot;, row.names=FALSE)
+
+#------#
+# Second Test Model
+# Variables chosen by hand - DJ
+sectestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Age + GS + TRB + AST + BLK + TOV + PTS + Last2Yrs3P + Last2Yrs3PA + Last2Yrs2P + Last2Yrs2PA + Last2YrsTRB + Last2YrsAST + Last2YrsPTS + PlayoffGS + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+sectestmodel.full &lt;- lm(data=filtered.data, sectestvars.lmformula)
+summary(sectestmodel.full)
+
+sectestmodel.reduced &lt;- step(sectestmodel.full, direction=&quot;backward&quot;)
+summary(sectestmodel.reduced)
+
+#------#
+# 3rd Test Model
+# Variables chosen by hand - DJ
+thirdtestvars.lmformula &lt;-
+  &quot;Salary ~ Ht + Age + GS + AST + BLK + TOV + PTS + CareerFG + CareerFGA + CareerTRB + CareerAST + CareerPTS + PlayoffGS + PlayoffTRB + PlayoffAST + PlayoffPTS&quot; %&gt;%
+  as.formula()
+
+filtered.data &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year&lt;=2015)
+
+thirdtestmodel.full &lt;- lm(data=filtered.data, thirdtestvars.lmformula)
+summary(thirdtestmodel.full)
+
+thirdtestmodel.reduced &lt;- step(thirdtestmodel.full, direction=&quot;backward&quot;)
+summary(thirdtestmodel.reduced)
+saveRDS(thirdtestmodel.reduced,  file =  &quot;thirdtestmodel_reduced.rds&quot;)
+
+#-------------------------------#
+### PREDICT ALL 2016 PLAYER SALARIES AND COMPARE TO ACTUAL
+data2016 &lt;- 
+  Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year==2016)
+Model3_FITvsACTUAL &lt;- 
+  data2016 %&gt;%
+  predict(thirdtestmodel.reduced, newdata=., interval=&quot;confidence&quot;) %&gt;%
+  tbl_df() %&gt;%
+  mutate(NBASalary=data2016$Salary) 
+
+Salary.Data %&gt;%
+  filter(Salary&gt;500000, Year==2016) %&gt;%
+  bind_cols(Model3_FITvsACTUAL, .) %&gt;%
+  write.csv(., &quot;Model3_FITvsACTUAL.csv&quot;, row.names=FALSE)</code></pre>
+<p><br><br></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

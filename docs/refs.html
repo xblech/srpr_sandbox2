@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Dylan Blechner" />
+
+<meta name="date" content="2017-01-14" />
+
+<title>Reflections and References</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Senior Project - Dylan Blechner</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="thestat.html">The Statistic</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    The Data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="thedata.html">The Data</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="thedata2007.html">2007-2008</a>
+    </li>
+    <li>
+      <a href="thedata2008.html">2008-2009</a>
+    </li>
+    <li>
+      <a href="thedata2009.html">2009-2010</a>
+    </li>
+    <li>
+      <a href="thedata2010.html">2010-2011</a>
+    </li>
+    <li>
+      <a href="thedata2011.html">2011-2012</a>
+    </li>
+    <li>
+      <a href="thedata2012.html">2012-2013</a>
+    </li>
+    <li>
+      <a href="thedata2013.html">2013-2014</a>
+    </li>
+    <li>
+      <a href="thedata2014.html">2014-2015</a>
+    </li>
+    <li>
+      <a href="thedata2015.html">2015-2016</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    NBA Predictions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="nbamodel4.html">All Positions</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="nbapointguards.html">NBA Point Guards</a>
+    </li>
+    <li>
+      <a href="nbashootingguards.html">NBA Shooting Guards</a>
+    </li>
+    <li>
+      <a href="nbasmallforwards.html">NBA Small Forwards</a>
+    </li>
+    <li>
+      <a href="nbapowerforwards.html">NBA Power Forwards</a>
+    </li>
+    <li>
+      <a href="nbacenters.html">NBA Centers</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="salarycomparisons.html">Salary Comparisons</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Portfolio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Portfolio_thestat.html">Portfolio</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="stepbystep.html">Step-by-Steps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="refs.html">References</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Reflections and References</h1>
+<h4 class="author"><em>Dylan Blechner</em></h4>
+<h4 class="date"><em>January 14, 2017</em></h4>
+
+</div>
+
+
+<div id="reflections" class="section level2">
+<h2>Reflections</h2>
+<p><br><br></p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p><br><br></p>
+<div id="basic-r" class="section level3">
+<h3>Basic R</h3>
+<p><em>R Cookbook</em>, Paul Teetor, O’Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472, 2011. <br> <br> “Renaming Columns in a Data Frame.” Renaming Columns in a Data Frame. N.p., n.d. Web. 29 Mar. 2017. <a href="http://www.cookbook-r.com/Manipulating_data/Renaming_columns_in_a_data_frame/" class="uri">http://www.cookbook-r.com/Manipulating_data/Renaming_columns_in_a_data_frame/</a>. <br> <br> “R- How to Dynamically Name Data Frames?” Variables - R- How to Dynamically Name Data Frames? - Stack Overflow. Stack Overflow, 22 June 2013. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/17255851/r-how-to-dynamically-name-data-frames" class="uri">http://stackoverflow.com/questions/17255851/r-how-to-dynamically-name-data-frames</a>. <br> <br> “R List to Data Frame.” Stack Overflow. Stack Overflow, 19 Nov. 2010. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/4227223/r-list-to-data-frame" class="uri">http://stackoverflow.com/questions/4227223/r-list-to-data-frame</a>. <br> <br> “How to Convert from String to Numeric Value in R.” Stack Overflow. Stack Overflow, 13 Nov. 2013. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/19965265/how-to-convert-from-string-to-numeric-value-in-r" class="uri">http://stackoverflow.com/questions/19965265/how-to-convert-from-string-to-numeric-value-in-r</a>. <br> <br> Darrenjw, Author. “Keeping R up to Date on Ubuntu Linux.” Darren Wilkinson’s Research Blog. Darren Wilkinson’s Research Blog, 10 Nov. 2012. Web. 29 Mar. 2017. <a href="https://darrenjw.wordpress.com/2012/11/10/keeping-r-up-to-date-on-ubuntu-linux/" class="uri">https://darrenjw.wordpress.com/2012/11/10/keeping-r-up-to-date-on-ubuntu-linux/</a>. <br> <br> “Check Existence of Directory and Create If Doesn’t Exist.” R - Check Existence of Directory and Create If Doesn’t Exist - Stack Overflow. Stack Overflow, 18 Nov. 2010. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/4216753/check-existence-of-directory-and-create-if-doesnt-exist" class="uri">http://stackoverflow.com/questions/4216753/check-existence-of-directory-and-create-if-doesnt-exist</a>. <br> <br> “Reusing a Model Built in R.” Stack Overflow. Stack Overflow, 25 Feb. 2011. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/5118074/reusing-a-model-built-in-r" class="uri">http://stackoverflow.com/questions/5118074/reusing-a-model-built-in-r</a>. <br> <br> “A Better Way of Saving and Loading Objects in R.” R-bloggers. R-Bloggers, 01 Apr. 2012. Web. 29 Mar. 2017. <a href="https://www.r-bloggers.com/a-better-way-of-saving-and-loading-objects-in-r/" class="uri">https://www.r-bloggers.com/a-better-way-of-saving-and-loading-objects-in-r/</a>. <br> <br> “Create a Sequential Number (counter) for Rows within Each Group of a Dataframe.” R - Create a Sequential Number (counter) for Rows within Each Group of a Dataframe - Stack Overflow. Stack Overflow, 16 Aug. 2012. Web. 22 Mar. 2017. <a href="http://stackoverflow.com/questions/11996135/create-a-sequential-number-counter-for-rows-within-each-group-of-a-dataframe" class="uri">http://stackoverflow.com/questions/11996135/create-a-sequential-number-counter-for-rows-within-each-group-of-a-dataframe</a>. <br><br> <br><br></p>
+</div>
+<div id="web-scraping" class="section level3">
+<h3>Web Scraping</h3>
+<p>Spector, Phil. “Department of Statistics.” Reading Web Pages with R | Department of Statistics. University of California, Berkeley, n.d. Web. 29 Mar. 2017. <a href="http://statistics.berkeley.edu/computing/r-reading-webpages" class="uri">http://statistics.berkeley.edu/computing/r-reading-webpages</a>. <br> <br> “Rvest Extract Option Value and Text from Select.” R - Rvest Extract Option Value and Text from Select - Stack Overflow. Stack Overflow, 24 July 2015. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/31615435/rvest-extract-option-value-and-text-from-select" class="uri">http://stackoverflow.com/questions/31615435/rvest-extract-option-value-and-text-from-select</a>. <br> <br> “Rvest How to Select a Specific Css Node by Id.” Html - Rvest How to Select a Specific Css Node by Id - Stack Overflow. Stack Overflow, 20 Aug. 2015. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/32127921/rvest-how-to-select-a-specific-css-node-by-id" class="uri">http://stackoverflow.com/questions/32127921/rvest-how-to-select-a-specific-css-node-by-id</a>. <br> <br> “How to Read a Commented out HTML Table Using ReadHTMLTable in R.” Stack Overflow. Stack Overflow, 9 Sept. 2016. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/39420282/how-to-read-a-commented-out-html-table-using-readhtmltable-in-r" class="uri">http://stackoverflow.com/questions/39420282/how-to-read-a-commented-out-html-table-using-readhtmltable-in-r</a>.<br> <br> “How to Build a Dataset in R Using an RSS Feed or Web Page.” R-bloggers. R-Bloggers, 26 Apr. 2011. Web. 29 Mar. 2017. <a href="https://www.r-bloggers.com/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/" class="uri">https://www.r-bloggers.com/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/</a>. <br> <br> “Extract Links from Html Table.” Xml - Extract Links from Html Table - Stack Overflow. Stack Overflow, 5 Sept. 2012. Web. 29 Mar. 2017. <a href="http://stackoverflow.com/questions/12290402/extract-links-from-html-table" class="uri">http://stackoverflow.com/questions/12290402/extract-links-from-html-table</a>. <br><br> <br><br></p>
+</div>
+<div id="libraries-dplyr-ggplot-broom-tidy" class="section level3">
+<h3>Libraries: dplyr, ggplot, broom, tidy</h3>
+<p><a href="http://stat545.com/block013_plyr-ddply.html" class="uri">http://stat545.com/block013_plyr-ddply.html</a><br> <br> <br> <a href="http://stackoverflow.com/questions/32483280/use-dplyr-to-replace-values-on-select-columns" class="uri">http://stackoverflow.com/questions/32483280/use-dplyr-to-replace-values-on-select-columns</a><br> <br> <br> <a href="ftp://cran.r-project.org/pub/R/web/packages/broom/vignettes/broom.html" class="uri">ftp://cran.r-project.org/pub/R/web/packages/broom/vignettes/broom.html</a> <br> <br> <br> <a href="https://cran.r-project.org/web/packages/broom/vignettes/broom_and_dplyr.html" class="uri">https://cran.r-project.org/web/packages/broom/vignettes/broom_and_dplyr.html</a> <br> <br> <br> <a href="https://www.r-bloggers.com/dplyr-do-some-tips-for-using-and-programming/" class="uri">https://www.r-bloggers.com/dplyr-do-some-tips-for-using-and-programming/</a> <br> <br> <br> <a href="https://opr.princeton.edu/workshops/Downloads/2016Jan_BroomRobinson.pdf" class="uri">https://opr.princeton.edu/workshops/Downloads/2016Jan_BroomRobinson.pdf</a><br> <br> <br> <a href="http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/" class="uri">http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/</a><br> <br> <br> <a href="http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/" class="uri">http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/</a><br> <br> <br> <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html#ggplot2-calls" class="uri">http://r4ds.had.co.nz/exploratory-data-analysis.html#ggplot2-calls</a><br> <br> <br> <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models" class="uri">http://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models</a><br> <br> <br> <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf</a><br> <br> <br> <a href="http://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf">http://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf</a><br> <br> <br> <a href="http://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf#page=61">http://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf#page=61</a><br> <br><br> <br><br></p>
+</div>
+<div id="linear-regressions" class="section level3">
+<h3>Linear Regressions</h3>
+<p><a href="http://stackoverflow.com/questions/1169539/linear-regression-and-group-by-in-r" class="uri">http://stackoverflow.com/questions/1169539/linear-regression-and-group-by-in-r</a><br> <br> <br> <a href="http://stackoverflow.com/questions/5774813/short-formula-call-for-many-variables-when-building-a-model" class="uri">http://stackoverflow.com/questions/5774813/short-formula-call-for-many-variables-when-building-a-model</a><br> <br> <br> <a href="https://inclass.kaggle.com/c/15-071x-the-analytics-edge-summer-2015/forums/t/15411/help-with-error-message-factor-description-has-new-levels" class="uri">https://inclass.kaggle.com/c/15-071x-the-analytics-edge-summer-2015/forums/t/15411/help-with-error-message-factor-description-has-new-levels</a><br> <br> <br> <a href="http://stackoverflow.com/questions/5251507/how-to-succinctly-write-a-formula-with-many-variables-from-a-data-frame" class="uri">http://stackoverflow.com/questions/5251507/how-to-succinctly-write-a-formula-with-many-variables-from-a-data-frame</a><br> <br> <br> <a href="http://stackoverflow.com/questions/24173468/r-print-equation-of-linear-regression-on-the-plot-itself" class="uri">http://stackoverflow.com/questions/24173468/r-print-equation-of-linear-regression-on-the-plot-itself</a><br> <br> <br> <a href="http://stackoverflow.com/questions/17432142/plot-the-observed-and-fitted-values-from-a-linear-regression-using-xyplot-from" class="uri">http://stackoverflow.com/questions/17432142/plot-the-observed-and-fitted-values-from-a-linear-regression-using-xyplot-from</a><br> <br> <br> <a href="http://r4ds.had.co.nz/model-basics.html#a-simple-model" class="uri">http://r4ds.had.co.nz/model-basics.html#a-simple-model</a><br> <br> <br> <a href="http://r4ds.had.co.nz/model-basics.html#exercises-60" class="uri">http://r4ds.had.co.nz/model-basics.html#exercises-60</a><br> <br> <br> <a href="http://stats.stackexchange.com/questions/122875/unusual-linear-regression-results-in-r" class="uri">http://stats.stackexchange.com/questions/122875/unusual-linear-regression-results-in-r</a><br> <br><br> <br><br></p>
+<div id="how-to-detect-outliers-in-data" class="section level5">
+<h5>How to detect outliers in data</h5>
+<p><br> Kriegel, Hans-Peter, Peer Kröger, and Arthur Zimek. “Proceedings of 20th ACM SIGKDD Conference on Knowledge Discovery and Data Mining - ADKDD’14.” (2014): n. pag. Outlier Detection Techniques. 16th ACM SIGKDD Conference on Knowledge Discovery and Data Mining, 2010. Web. 22 Mar. 2017. <br> <br> <a href="http://www.dbs.ifi.lmu.de/~zimek/publications/KDD2010/kdd10-outlier-tutorial.pdf" class="uri">http://www.dbs.ifi.lmu.de/~zimek/publications/KDD2010/kdd10-outlier-tutorial.pdf</a>. <br> <br> Prabhakaran, Selva. “Outlier Treatment.” Outlier Treatment With R | Multivariate Outliers. R-statistics.co, 2016. Web. 22 Mar. 2017. <a href="http://r-statistics.co/Outlier-Treatment-With-R.html" class="uri">http://r-statistics.co/Outlier-Treatment-With-R.html</a>. <br><br> <br><br></p>
+</div>
+</div>
+<div id="rmarkdown-libraries-dt-datatables-stargazer" class="section level3">
+<h3>RMarkdown Libraries: DT (datatables), stargazer</h3>
+<p>Hlavac, Marek (2015). stargazer: Well-Formatted Regression and Summary Statistics Tables.<br />
+R package version 5.2. <a href="http://CRAN.R-project.org/package=stargazer" class="uri">http://CRAN.R-project.org/package=stargazer</a><br />
+<br><br> <a href="http://jakeruss.com/cheatsheets/stargazer.html" class="uri">http://jakeruss.com/cheatsheets/stargazer.html</a><br> <br> <br> <a href="http://stackoverflow.com/questions/39816597/stargazer-line-type" class="uri">http://stackoverflow.com/questions/39816597/stargazer-line-type</a><br> <br> <br> <a href="http://www.htmlwidgets.org/showcase_datatables.html" class="uri">http://www.htmlwidgets.org/showcase_datatables.html</a><br> <br><br> <br><br></p>
+</div>
+<div id="for-future-reference" class="section level3">
+<h3>For future reference:</h3>
+<p><a href="https://www.r-statistics.com/2013/05/log-transformations-for-skewed-and-wide-distributions-from-practical-data-science-with-r/" class="uri">https://www.r-statistics.com/2013/05/log-transformations-for-skewed-and-wide-distributions-from-practical-data-science-with-r/</a><br> <br> <br> <a href="http://www.kenbenoit.net/courses/ME104/logmodels2.pdf" class="uri">http://www.kenbenoit.net/courses/ME104/logmodels2.pdf</a><br></p>
+</div>
+<div id="i-dont-know-what-these-are" class="section level3">
+<h3>I DONT KNOW WHAT THESE ARE</h3>
+<p><a href="http://www.unh.edu/halelab/BIOL933/labs/lab6.pdf" class="uri">http://www.unh.edu/halelab/BIOL933/labs/lab6.pdf</a><br> <a href="https://rstudio-pubs-static.s3.amazonaws.com/65641_88a692252c6c4f2ab279d115e59e6767.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/65641_88a692252c6c4f2ab279d115e59e6767.html</a><br> <a href="https://gist.github.com/djhocking/62c76e63543ba9e94ebe" class="uri">https://gist.github.com/djhocking/62c76e63543ba9e94ebe</a><br> <a href="https://rstudio-pubs-static.s3.amazonaws.com/65641_88a692252c6c4f2ab279d115e59e6767.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/65641_88a692252c6c4f2ab279d115e59e6767.html</a><br> <a href="http://stackoverflow.com/questions/22649536/model-matrix-with-all-pairwise-interactions-between-columns" class="uri">http://stackoverflow.com/questions/22649536/model-matrix-with-all-pairwise-interactions-between-columns</a><br> <a href="https://onlinecourses.science.psu.edu/stat501/node/36" class="uri">https://onlinecourses.science.psu.edu/stat501/node/36</a><br> <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=video&amp;cd=10&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjvm8TogYjRAhUF5yYKHaFICxUQtwIIRzAJ&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DK-ss_ag2k9E&amp;usg=AFQjCNF5z-X6AnhNfDbK-gDFYWTlkHYlmw&amp;sig2=HLZ25mCEOk3l7aMOWpBbjA">https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=video&amp;cd=10&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjvm8TogYjRAhUF5yYKHaFICxUQtwIIRzAJ&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DK-ss_ag2k9E&amp;usg=AFQjCNF5z-X6AnhNfDbK-gDFYWTlkHYlmw&amp;sig2=HLZ25mCEOk3l7aMOWpBbjA</a><br></p>
+<p><br><br> <br><br></p>
+</div>
+<div id="rmarkdown" class="section level3">
+<h3>RMarkdown:</h3>
+<p><br><br> Strayer, Nick, and Lucy D’Agostino McGowan. “How to Make an RMarkdown Website.” How to Make an RMarkdown Website. N.p., 27 Oct. 2016. Web. 01 Jan. 2017. <a href="http://nickstrayer.me/RMarkdown_Sites_tutorial/" class="uri">http://nickstrayer.me/RMarkdown_Sites_tutorial/</a>. <br><br></p>
+<p><br><br></p>
+</div>
+<div id="github" class="section level3">
+<h3>GitHub:</h3>
+<p><em>Happy Git and GitHub for the useR</em>, Jenny Bryan, Creative Commons Attribution-NonCommercial 4.0 International License, 2016.<br />
+<a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a></p>
+<p><br><br></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
